@@ -25,10 +25,19 @@ interface PostProps {
 
 //em vez de usar props fazer desistruturacao de objeto {}
 export function Post({ author, content, publishedAt }: PostProps) {
-  const [comments, setComments] = useState([""]);
+  const  [comments, setComments] = useState<string[]>([]);
 
   const [newCommentText, setNewCommentText] = useState("");
 
+  
+  const handleCreateNewComment = (event: FormEvent) => {
+    event.preventDefault();
+    
+    setComments([...comments, newCommentText]);
+    
+    setNewCommentText("");
+  };
+  
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'de' y 'às' HH:mm'h'",
@@ -39,14 +48,6 @@ export function Post({ author, content, publishedAt }: PostProps) {
     locale: ptBR,
     addSuffix: true,
   });
-
-  const handleCreateNewComment = (event: FormEvent) => {
-    event.preventDefault();
-
-    setComments([...comments, newCommentText]);
-
-    setNewCommentText("");
-  };
 
   const handleNewCommentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     event.target.setCustomValidity("");
