@@ -1,28 +1,10 @@
 import Header from "./components/header/Header";
-import { Post } from "./components/posts/Post";
-import SideBar from "./components/sideBar/SideBar";
+import { Post, PostType } from "./components/posts/Post";
+import SideBar from "./sideBar/SideBar";
 import styles from "./App.module.css";
 import "./global.css";
 
-
-interface Author{
-  avatarUrl: string;
-  name: string;
-  role:string;
-}
-
-type Content = {
-  type : "paragraph" | "link";
-  content: string;
-}
-
-interface PostData {
-  id: number;
-  author: Author;
-  content: Content[];
-  publishedAt: Date;
-}
-const posts: PostData[] = [
+const posts: PostType[] = [
   {
     id: 1,
     author: {
@@ -69,14 +51,7 @@ export default function App() {
         <SideBar />
         <main>
           {posts.map((post) => {
-            return (
-              <Post
-                key={post.id}
-                author={post.author}
-                content={post.content}
-                publishedAt={post.publishedAt}
-              />
-            );
+            return <Post key={post.id} post={post} />;
           })}
         </main>
       </div>
