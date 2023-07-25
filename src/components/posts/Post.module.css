@@ -26,6 +26,7 @@
 
 .content a:hover {
   color: var(--green-300);
+  cursor: pointer;  
 }
 
 .post > header {
